@@ -21,4 +21,4 @@ const adminSchema = mongoose.Schema({
 module.exports = mongoose.model('Admin',adminSchema);
 
 
-//some changes in server
+
