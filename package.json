@@ -1,39 +1,25 @@
 {
-  "name": "drbslapp",
-  "version": "1.0.0",
-  "description": "a MERN app for drbsl",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chauchausoup/drbslApp.git"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mongoose": "^5.9.23",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
-  },
-  "keywords": [
-    "mern",
-    "react",
-    "node"
-  ],
-  "author": "chauchausoup",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/chauchausoup/drbslApp/issues"
-  },
-  "homepage": "https://github.com/chauchausoup/drbslApp#readme"
-}
+      "name": "drbslapp",
+      "version": "1.0.0",
+      "description": "a MERN app for drbsl",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/chauchausoup/drbslApp.git"
+      },
+      "keywords": [
+        "mern",
+        "react",
+        "node"
+      ],
+      "author": "chauchausoup",
+      "license": "ISC",
+      "bugs": {
+        "url": "https://github.com/chauchausoup/drbslApp/issues"
+      },
+      "homepage": "https://github.com/chauchausoup/drbslApp#readme"
+    }
+    
