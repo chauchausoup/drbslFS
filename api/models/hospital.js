@@ -27,7 +27,7 @@ const hospitalSchema = mongoose.Schema({
 })
 
 
-module.exports = mongoose.model('News',newsSchema);
+module.exports = mongoose.model('Hospital',hospitalSchema);
 
 
 
