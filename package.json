@@ -1,25 +1,21 @@
 {
-      "name": "drbslapp",
-      "version": "1.0.0",
-      "description": "a MERN app for drbsl",
-      "main": "index.js",
-      "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-      },
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/chauchausoup/drbslApp.git"
-      },
-      "keywords": [
-        "mern",
-        "react",
-        "node"
-      ],
-      "author": "chauchausoup",
-      "license": "ISC",
-      "bugs": {
-        "url": "https://github.com/chauchausoup/drbslApp/issues"
-      },
-      "homepage": "https://github.com/chauchausoup/drbslApp#readme"
-    }
-    
+  "name": "drbsl-rest-api",
+  "version": "1.0.0",
+  "description": "rest api for drbsl",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "drbsl-node-api"
+  },
+  "author": "chauchausoup",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.23"
+  }
+}
