@@ -1,0 +1,122 @@
+
+
+$navBgColor:gray;
+$navButtomColor:springgreen;
+$hoverColor:thistle;
+
+*{
+          margin: 0;
+          padding:0 ;
+}
+
+.Nav{
+          background-color:$navBgColor;
+          display: grid;
+          box-sizing: border-box;
+          height: 8vh;
+          border-bottom: 2px solid $navButtomColor;
+}
+.head{
+          display: flex;
+          justify-content: space-between;
+          padding: 5px;
+}
+
+ ul{
+          list-style: none;
+          background-color: rgb(182, 169, 169);
+
+
+}
+#socials1{
+          display: none;
+}
+
+#socials2{
+          display: flex;
+          justify-content: center;
+}
+#routes{
+          display:block;
+          
+          text-align: center;
+}
+#routes>li:hover{
+          background-color: $hoverColor;
+          cursor: pointer;
+}
+.drop{
+          display: grid;
+}
+.ceil{
+          display: none;
+}
+
+
+div#btn{
+          display: flex;
+          border: 2px solid black;
+          width: fit-content;
+          height: fit-content;
+          padding: 5px;
+          
+}
+#btn:hover{
+          background-color: $hoverColor;
+          cursor: pointer;
+}
+a:hover{
+          background-color:$hoverColor;
+          cursor: pointer;
+
+}
+#headline{
+          font-size:medium;
+          align-items: center;
+          justify-content: center;
+}
+
+
+
+ /* min-width :640px */
+@media screen and (min-width:640px){
+
+          .Nav{
+                    display: grid;
+                    grid-template-columns: 3fr 2fr ;
+          }
+
+          div#btn{
+                    display: none;
+          }
+          #socials2{
+                    display: none;
+          }
+
+          #socials1{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content:center;
+                    align-items: center;
+          }
+          
+          #routes{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content:space-around;
+                    align-items: center;
+          }
+          .drop{
+                    display: flex;
+                    justify-content:space-evenly;
+                    align-items: center;
+          }
+          .ceil{
+                    display: flex;
+                    justify-content:space-evenly;
+                    align-items: center;
+          }
+
+
+
+}

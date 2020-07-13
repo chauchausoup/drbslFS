@@ -1,0 +1,7 @@
+{
+      "env":{
+                "MONGO_ATLAS_PW":"academind",
+                "JWT_KEY": "secret",
+                "PORT":5000
+      }
+}

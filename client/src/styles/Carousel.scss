@@ -1,0 +1,27 @@
+.carousel{
+          text-align: center;
+          background-color: skyblue;
+          min-height: 92vh;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          
+
+          
+          
+          
+}
+
+.item{
+          height: 60vh;
+          min-width: 100%;
+          box-sizing: border-box;
+          transition: 0.5s;
+          align-items: center;
+          justify-content: center;
+          display: flex;          
+}
