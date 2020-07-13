@@ -35,7 +35,7 @@ function Login(){
             };
 
             axios
-                  .post('/admin',params)
+                  .post('/login',params)
                   .then(()=>console.log("user created"),
                   
                   )
@@ -57,8 +57,20 @@ return(
                         hello user
                   </p>
                   <form onSubmit={handleSubmit}>
-                        <input type="text" name="email" id="login_email" onChange={handleInputChange}/>
-                        <input type="password" name="password" id="login_password" onChange={handleInputChange}/>
+                        <input 
+                        type="text" 
+                        name="email" 
+                        id="login_email" 
+                        onChange={handleInputChange}
+                        />
+
+                        <input 
+                        type="password" 
+                        name="password" 
+                        id="login_password" 
+                        onChange={handleInputChange}
+                        />
+                        
                        <button type="submit">Login</button> 
                   </form>
 

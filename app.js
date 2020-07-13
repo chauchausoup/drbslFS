@@ -41,9 +41,9 @@ db.once('open', function() {
 
 //lets make some routes
 
-const  adminRoutes = require('./server/api/routes/admin')
-const loginRoutes=require('./server/api/routes/login');
-const newsRoutes = require('./server/api/routes/news');
+const  adminRoutes = require('./api/routes/admin')
+const loginRoutes=require('./api/routes/login');
+const newsRoutes = require('./api/routes/news');
 
 app.use('/admin',adminRoutes);
 app.use('/login',loginRoutes);
