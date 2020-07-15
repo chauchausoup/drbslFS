@@ -1,12 +1,12 @@
 
 import React, { Component } from "react";
 import { Map, TileLayer, Marker } from "react-leaflet";
+import '../../App.css'
 
-export default class DashboardLocation extends Component {
+
+class DashboardLocation extends Component {
   constructor(props) {
     super(props)
-  
-    this.comRef=React.createRef();
     
     this.state = {
       center: {
@@ -67,10 +67,12 @@ export default class DashboardLocation extends Component {
 
   render() {
     return (
+      <React.Fragment>
       <Map
         center={this.state.center}
         zoom={this.state.zoom}
         onClick={this.addMarker}
+        id="mapid"
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -86,7 +88,11 @@ export default class DashboardLocation extends Component {
            onclick={this.removeMarkerHandler}
          />
         ))}
+        
       </Map>
+      <input type="button" value="Submit"/><br/>
+      </React.Fragment>
     );
   }
 }
+export default DashboardLocation;
