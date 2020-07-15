@@ -1,18 +1,16 @@
-import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
-
-
+import React,{useState,useEffect} from 'react';
+import {Link, useHistory} from 'react-router-dom';
 
 const axios = require('axios');
-
-
-
-
 function Login(){
       const [info,setInfo]= useState({
             email:"",
             password:""
       })
+      const [validity,setValidity]=useState(0);
+      let history = useHistory();
+
+
 
       function handleInputChange(e){
             setInfo({
@@ -24,28 +22,45 @@ function Login(){
 
       }
 
+      
       function handleSubmit(e){
             e.preventDefault();
-            console.log("hey");
             console.log(info)
-
             let  params = {
                   email:info.email,
                   password:info.password
             };
-
             axios
                   .post('/login',params)
-                  .then(()=>console.log("user created"),
+                  .then((res)=>{
                   
-                  )
+                             if(res.status===200){
+                              setValidity((validity) =>{
+                                    validity=(!validity)
+                                    if(validity){
+                                          //here i redirect to localhost/admin
+                                          history.push('/admin')
+
+                                    }
+                              })
+                          }
+
+                        console.log(res)
+                  })
                   .catch(err=>{
                         console.log(err)
                   });
 
-
       };
 
+      
+
+         function handleRedirect(){
+            if(validity){
+                  console.log("mama")
+      
+            }
+         }              
 
 
 return(
@@ -72,6 +87,7 @@ return(
                         />
                         
                        <button type="submit">Login</button> 
+                       
                   </form>
 
           </div>
