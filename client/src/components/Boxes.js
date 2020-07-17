@@ -8,19 +8,18 @@ const axios = require('axios');
 function Boxes(){
    const[hospitalData,setHospitalData]= useState([])
 
-    useEffect(()=>{
-            axios.get('/hospital')
-              .then(response => {
-                var hospitalDatum = response.data.items;
-                setHospitalData(hospitalDatum)
-                console.log(hospitalData.name);
 
-                
-
-              })
-              .catch(err => console.log(err))
-          
-    },[hospitalData])
+   useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        '/hospital',
+      );
+ 
+      setHospitalData(result.data.items);
+    };
+ 
+    fetchData();
+  }, []);
 
 return(
          <div className="hospitals">
@@ -28,7 +27,7 @@ return(
                     Hospitals that I have served:
                     </h1>
                     <div className="boxes">
-                   {/* {
+                    {
                     hospitalData.map((data,index)=>{
                               return(
                               <div className="box" key={index}>
@@ -40,7 +39,7 @@ return(
                               </div>
                               )
                     }) 
-                   }  */}
+                   }  
                     </div>
          </div>
 )

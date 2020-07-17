@@ -26,6 +26,7 @@ exports.get_hospital_all=(req,res,next)=>{
                 })
             }
            res.status(200).json(response)
+           console.log(response + "from backend")
 
             
             })
@@ -34,7 +35,7 @@ exports.get_hospital_all=(req,res,next)=>{
                 console.log(err);
                 res.status(500).json({
                       error: err
-                })
-          })
+            })
+        })
         
 }
