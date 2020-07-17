@@ -10,17 +10,18 @@ const hospitalSchema = mongoose.Schema({
             },
          location:{
                    type:String,
-                   required:true,
-         },speciality:{
+                   required:true
+         },
+         speciality:{
                type:String,
                default:"Physician"
          },
-         fromDate:{
-               type:Date,
+         from:{
+               type:String,
                required:true
          },
-         toDate:{
-               type:Date,
+         to:{
+               type:String,
                required:true
          }
 

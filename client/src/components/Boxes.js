@@ -1,24 +1,34 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import '../styles/Boxes.scss'
-import hospitalData from '../data/hospitals';
+
+const axios = require('axios');
+
+
 
 function Boxes(){
+   const[hospitalData,setHospitalData]= useState([])
+
+    useEffect(()=>{
+            axios.get('/hospital')
+              .then(response => {
+                var hospitalDatum = response.data.items;
+                setHospitalData(hospitalDatum)
+                console.log(hospitalData.name);
+
+                
+
+              })
+              .catch(err => console.log(err))
+          
+    },[hospitalData])
+
 return(
          <div className="hospitals">
                     <h1 id="head">
                     Hospitals that I have served:
                     </h1>
                     <div className="boxes">
-                   
-                              <Box/>
-                    </div>
-         </div>
-)
-}
-
-
-function Box(){
-          return(
+                   {/* {
                     hospitalData.map((data,index)=>{
                               return(
                               <div className="box" key={index}>
@@ -29,10 +39,14 @@ function Box(){
                                         To : <label id="to">{data.to}</label><br/>
                               </div>
                               )
-                    })
-                   
-          )
+                    }) 
+                   }  */}
+                    </div>
+         </div>
+)
 }
+
+
 
 export default Boxes;
 

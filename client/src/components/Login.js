@@ -18,7 +18,7 @@ function Login(){
                   [e.target.name]:e.target.value
                   
             })
-            console.log(info)
+           
 
       }
 
@@ -55,13 +55,7 @@ function Login(){
       };
 
       
-
-         function handleRedirect(){
-            if(validity){
-                  console.log("mama")
-      
-            }
-         }              
+            
 
 
 return(

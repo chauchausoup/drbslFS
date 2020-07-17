@@ -37,19 +37,19 @@ exports.hospital_post=(req,res,next)=>{
             name:req.body.name,
             location:req.body.location,
             speciality:req.body.speciality,
-            fromDate:req.body.fromDate,
-            toDate:req.body.toDate
+            from:req.body.from,
+            to:req.body.to
       }) 
       hospital.save()
               .then(result=>{
-                    res.json({
+                    res.status(200).json({
                           message:"ok",
                           hospitalData:{
                                 name:result.name,
                                 location:result.location,
                                 speciality:result.speciality,
-                                fromDate:result.fromDate,
-                                toDate:result.toDate
+                                from:result.from,
+                                to:result.to
                           }
                           
                     })
@@ -70,7 +70,30 @@ exports.weekDays_post=(req,res,next)=>{
 }
 
 exports.news_post=(req,res,next)=>{
-           
+      const news = new News({
+            _id:new mongoose.Types.ObjectId(),
+            title:req.body.name,
+            content:req.body.location,
+            date:req.body.date
+            
+      }) 
+      news.save()
+              .then(result=>{
+                    res.json({
+                          message:"ok",
+                          newsData:{
+                                title:result.title,
+                                content:result.content,
+                                date:result.date
+                          }
+                          
+                    })
+              })
+              .catch(err=>{
+                  res.json({
+                        error:err
+                  })
+            }) 
 
                   
 }
