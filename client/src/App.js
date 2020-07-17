@@ -10,15 +10,17 @@ import Dashboard2 from './components/Dashboard2';
 
 
 function App() {
+  
   return (
     <Router>
        <div >
         <NavBar/>
         <Switch>
             <Route exact path="/" component={Middle}/>
-            <Route exact path="/news" component={News}/>
+            <Route exact path="/news" exact component={News}/>
             <Route exact path ="/login" component={Login}/>
             <Route exact path="/admin" component={Dashboard2}/>
+
           </Switch>
         <Footer/>
     </div>

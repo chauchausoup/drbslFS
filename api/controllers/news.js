@@ -21,7 +21,7 @@ exports.get_news_all=(req,res,next)=>{
                     date:n.date,
                     request:{
                         type:'GET',
-                        url:"/products/"+ n._id
+                        url:"/news/"+ n._id
                     }
                 }
             })
@@ -40,7 +40,28 @@ exports.get_news_all=(req,res,next)=>{
 
 
 exports.get_news_single=(req,res,next)=>{
-     
+     const id=req.params.newsId;
+     News.findById(id)
+        .select('_id title content date')
+        .exec()
+        .then((news)=>{
+            if(news){
+                res.status(200).json({
+                    item:news,
+                })
+            }else{
+                res.status(400).json({
+                    message:"not valid entry"
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                  error: err
+            })
+        });
+
                
 }
 
