@@ -12,8 +12,11 @@ function DashboardLogout() {
 
      function onclick(){
 
-            console.log("hello");
+            console.info("Logouting clearing session")
             history.push('/')
+            sessionStorage.setItem("userData","");
+            sessionStorage.clear();
+            
 
      }
 
