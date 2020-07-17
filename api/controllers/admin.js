@@ -72,15 +72,15 @@ exports.weekDays_post=(req,res,next)=>{
 exports.news_post=(req,res,next)=>{
       const news = new News({
             _id:new mongoose.Types.ObjectId(),
-            title:req.body.name,
-            content:req.body.location,
+            title:req.body.title,
+            content:req.body.content,
             date:req.body.date
             
       }) 
       news.save()
               .then(result=>{
                     res.json({
-                          message:"ok",
+                          message:"ok the news was posted",
                           newsData:{
                                 title:result.title,
                                 content:result.content,
