@@ -6,7 +6,7 @@ import Middle from './components/Middle'
 import { BrowserRouter as Router,Switch,Route } from 'react-router-dom';  
 import Login from './components/Login';
 import News from './components/News'
-import Dashboard from './components/Dashboard';
+import Dashboard2 from './components/Dashboard2';
 
 
 function App() {
@@ -14,14 +14,15 @@ function App() {
     <Router>
        <div >
         <NavBar/>
-          <Switch>
+        <Switch>
             <Route exact path="/" component={Middle}/>
             <Route exact path="/news" component={News}/>
             <Route exact path ="/login" component={Login}/>
-            <Route exact path="/admin" component={Dashboard}/>
+            <Route exact path="/admin" component={Dashboard2}/>
           </Switch>
         <Footer/>
     </div>
+  
     </Router>
 
    

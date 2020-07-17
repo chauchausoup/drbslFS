@@ -40,6 +40,7 @@ function Login(){
                                     if(validity){
                                           //here i redirect to localhost/admin
                                           history.push('/admin')
+                                          //sessionStorage.setItem('userData',res)
 
                                     }
                               })

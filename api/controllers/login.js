@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
 const Admin = require('../models/admin');
-
 
 exports.admin_post_login=(req,res,next)=>{
       Admin.find({email:req.body.email})
