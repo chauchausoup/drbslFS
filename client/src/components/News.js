@@ -11,7 +11,6 @@ function News2() {
       <Router>
         <Switch>
           <Route path={"/news/:newsId"} exact component={SingleMost} />
-          <Route path={"/news/:newsId/delete"} component={SingleMostDelete} />
           
 
           <Route path={"/news"} exact component={News} />
@@ -101,6 +100,8 @@ function SingleMost(props) {
     <Router>
       <Switch>
       <Route  path={"/news/:newsId/edit"} render={() => <SingleMostEdit myProp={singleMost} />} />
+      <Route  path={"/news/:newsId/delete"} component={SingleMostDelete} />
+
       </Switch>
         
     <div key={singleMost._id}>
@@ -148,6 +149,7 @@ function SingleMostDelete(props){
         .then(function (response) {
           
           history.push('/news')
+          history.go()
         })
         .catch(function (error) {
           console.log(error);
@@ -205,15 +207,7 @@ console.log(editInfo)
               date:editInfo.date
 
         };
-         /*    Object.keys(editInfo).forEach((key)=>{
-              if(key!=="_id"){
-                console.log(key,editInfo[key])
-
-                params =params.push({
-                  key:editInfo[key]
-                  });
-              }
-            }) */
+        
 
            
             axios
@@ -223,6 +217,7 @@ console.log(editInfo)
 
                   if(res.status===200){
                         history.push('/news')
+                        history.go()
 
                   }
                   
