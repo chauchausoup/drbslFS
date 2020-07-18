@@ -8,10 +8,10 @@ import Handlers from './Handlers';
 export default function Middle(){
       return(
             <div>
-                        <Carousel/>
-                        <Boxes/>
+                        {/* <Carousel/>
+                        <Boxes/> */}
                         <Appointment/>
-                        <Handlers/>
+                       {/*  <Handlers/> */}
             </div>
       )
 }

@@ -14,7 +14,7 @@ function App() {
   return (
     <Router>
        <div >
-        <NavBar/>
+        {/* <NavBar/> */}
         <Switch>
             <Route exact path="/" component={Middle}/>
             <Route exact path="/news" exact component={News}/>
@@ -22,7 +22,7 @@ function App() {
             <Route exact path="/admin" component={Dashboard2}/>
 
           </Switch>
-        <Footer/>
+        {/* <Footer/> */}
     </div>
   
     </Router>

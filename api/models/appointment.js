@@ -9,7 +9,7 @@ const appointmentSchema = mongoose.Schema({
                required:true
             },
          phoneNo:{
-                   type:String,
+                   type:Number,
                    required:true,
          },
          location:{

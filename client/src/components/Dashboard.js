@@ -3,6 +3,8 @@ import DashboardLocation from './Dashboard/DashboardLocation';
 import DashboardNews from './Dashboard/DashboardNews';
 import DashboardHospital from './Dashboard/DashboardHospital';
 import DashboardWeekDays from './Dashboard/DashboardWeekDays';
+import DashboardViewAppointments from './Dashboard/DashboardViewAppointments'
+
 //import DashboardLogout from './Dashboard/DashboardLogout';
 
 import { BrowserRouter as Router,Switch,Route,Link } from 'react-router-dom';
@@ -23,6 +25,8 @@ return(
                         <Route exact path="/admin/news" component={DashboardNews}/>
                         <Route exact path ="/admin/hospital" component={DashboardHospital}/>
                         <Route exact path ="/admin/weekDays" component={DashboardWeekDays}/>
+                        <Route exact path ="/admin/viewAppointments" component={DashboardViewAppointments}/>
+
                         
 
 
@@ -33,6 +37,8 @@ return(
                   <Link to="/admin/hospital"><input type="button" value="Set New Hospital"/></Link><br/>
                   <Link to="/admin/news"><input type="button" value="Set News"/></Link><br/>
                   <Link to="/admin/weekDays"><input type="button" value="Set Days for the week"/></Link><br/>
+                  <Link to="/admin/viewAppointments"><input type="button" value="View Appointments"/></Link><br/>
+
                   
 
 

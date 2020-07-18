@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import '../styles/AppoiCalendar.scss'
+import { useHistory } from 'react-router';
+import axios from "axios";
 
 
 function AppoiCalendar(){
@@ -36,16 +38,21 @@ function MultipleForms(){
                     setStep(step-1)
           }
 
+          // step
+
         const [step,setStep]=useState(1);
+
+        // state
 
         const [state , setState] = useState({
                     name:"krishna",
-                    pNo:"977",
+                    phoneNo:"977",
                     location:"Pokhara",
                     problem:"abc",
                     history:"xyz"
                 })
                 
+        
         const value1={...state};
 
         switch(step){
@@ -105,10 +112,10 @@ function Step1(props){
           
           return(
                     <div>
-                              <input defaultValue={value1.name} id="appoiName"  onChange={(e)=>{handleChange('name',e)}}/>
-                              <input defaultValue={value1.pNo} id="appoiPno"  onChange={(e)=>{handleChange('pNo',e)}}/>
-                              <input defaultValue={value1.location} id="appoiLocation"  onChange={(e)=>{handleChange('location',e)}}/>
-                              <input type="button" value="Next" onClick={nextHandler}/>
+                              <input defaultValue={value1.name} id="appoiName"  onChange={(e)=>{handleChange('name',e)}}/><br/>
+                              <input defaultValue={value1.phoneNo} id="appoiPno"  onChange={(e)=>{handleChange('phoneNo',e)}}/><br/>
+                              <input defaultValue={value1.location} id="appoiLocation"  onChange={(e)=>{handleChange('location',e)}}/><br/>
+                              <input type="button" value="Next" onClick={nextHandler}/><br/>
                              
                     </div>
           )
@@ -130,11 +137,11 @@ function Step2(props){
 
           return(
                     <div>
-                            <input defaultValue={value1.history} id="appoiHistory"  onChange={(e)=>{handleChange('history',e)}}/>  
-                            <input defaultValue={value1.problem} id="appoiProblem"  onChange={(e)=>{handleChange('problem',e)}}/>  
+                            <input defaultValue={value1.history} id="appoiHistory"  onChange={(e)=>{handleChange('history',e)}}/>  <br/>
+                            <input defaultValue={value1.problem} id="appoiProblem"  onChange={(e)=>{handleChange('problem',e)}}/>  <br/>
 
-                              <input type="button" value="Next" onClick={nextHandler}/>
-                              <input type="button" value="Prev" onClick={prevHandler}/>
+                              <input type="button" value="Next" onClick={nextHandler}/><br/>
+                              <input type="button" value="Prev" onClick={prevHandler}/><br/>
 
                     </div>
           )
@@ -143,9 +150,39 @@ function Step2(props){
 
 function Step3(props){
     //backend must have gone here
+    let history = useHistory();
+
     
     function nextHandler(e){
         e.preventDefault();
+        //console.log(props.value1)
+        // make an axios post request with params to the API endpoint
+        let  params = {
+            name:props.value1.name,
+            phoneNo:props.value1.phoneNo,
+            location:props.value1.location,
+            problem:props.value1.problem,
+            history:props.value1.history
+
+      };
+      console.log(params);
+
+      axios
+      .post('/appointment',params)
+      .then((res)=>{
+        console.log(res);
+
+            if(res.status===200){
+                  history.push('/')
+                  //history.go()
+
+            }
+            
+      })
+      .catch(err=>{
+            console.log(err)
+      });
+        
         props.nextStep();
 }
 
@@ -159,14 +196,15 @@ function prevHandler(e){
                     <div>
                               <ul id="toConfirm">
                                   <li key="1">{value1.name}</li><br/>
-                                  <li key="2">{value1.pNo}</li><br/>
+                                  <li key="2">{value1.phoneNo}</li><br/>
                                   <li key="3">{value1.location}</li><br/>
                                   <li key="4">{value1.history}</li><br/>
                                   <li key="5">{value1.problem}</li><br/>
 
                               </ul>
-                              <input type="button" value="Confirm" onClick={nextHandler}/>
-                              <input type="button" value="Prev" onClick={prevHandler}/>
+                              <input type="button" value="Prev" onClick={prevHandler}/><br/>
+
+                              <input type="button" value="Confirm" onClick={nextHandler}/><br/>
                     </div>
           )
 
@@ -177,7 +215,7 @@ function Step4(props){
 
           return(
                     <div id="success">
-                            <h1>Thank You for your submission</h1>
+                            <h1>Thank You for your submission</h1><br/>
                             <p>Will email you shortly!</p>
                     </div>
           )

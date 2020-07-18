@@ -1,0 +1,35 @@
+
+#appointment{
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    height: 50vh;
+    margin: auto auto;
+}
+
+
+#newz{
+    color: gray;
+    padding: 20px;
+
+
+}
+
+#newz:hover{
+    background-color: rgba(0,0,0,0.14);
+    cursor: pointer;
+}
+
+#news-title{
+    color: black;
+    font-weight: 2px;
+}
+
+#news-date{
+    color:greenyellow;
+}
+
+#seeMore{
+    margin: auto;
+    color: grey;
+}

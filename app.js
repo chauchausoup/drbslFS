@@ -45,11 +45,16 @@ const  adminRoutes = require('./api/routes/admin')
 const loginRoutes=require('./api/routes/login');
 const newsRoutes = require('./api/routes/news');
 const hospitalRoutes = require('./api/routes/hospital');
+const appointmentRoutes = require('./api/routes/appointment');
+//const appointmentRoutes= require('./api/routes/appointment');
+
 
 app.use('/admin',adminRoutes);
 app.use('/login',loginRoutes);
 app.use('/news',newsRoutes);
 app.use('/hospital',hospitalRoutes);
+app.use('/appointment',appointmentRoutes);
+
 
 
 // error handling in a server app
