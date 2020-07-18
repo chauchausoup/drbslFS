@@ -12,10 +12,10 @@ function AppointmentView() {
     <div>
       <Router>
         <Switch>
-          <Route path={"/admin/viewAppointments/:appointmentId"} exact component={SingleMost} />
           
 
-          <Route path={"/admin/viewAppointments/"} exact component={Appointment} />
+          <Route exact path={"/admin/viewAppointments/"}  component={Appointment} />
+
 
 
         
@@ -42,13 +42,19 @@ function Appointment() {
   }, []);
 
   return appointmentData.map((appoi, index) => {
-    console.log(appoi);
+    
     const id = appoi.id;
+    console.log(id)
+
 
     return (
-        
-        <Link to={`/admin/viewAppointments/${id}`} style={{ textDecoration: "none" }} key={id}>
-        <div id="appoi" key={id}>
+        <div  key={id}  id="appoi">
+          <Router>
+            <Switch>
+          <Route exact path={"/admin/viewAppointments/:appointmentId"}  render={() => <SingleMost myProp={appointmentData} />} />
+        </Switch>
+        <Link to={`/admin/viewAppointments/${id}`} style={{ textDecoration: "none" }}>
+        <div key={id}>
           <label id="appointment-title">{appoi.name}</label>
           <br />
           <label id="appointment-location">{appoi.location}</label>
@@ -62,6 +68,9 @@ function Appointment() {
          
         </div>
       </Link>
+      </Router>
+
+      </div>
       
     );
   });
@@ -71,10 +80,11 @@ function Appointment() {
 
 
 function SingleMost(props) {
+  console.log("hello")
   const [singleMost, setSingleMost] = useState([]);
   let history = useHistory();
 
-  console.log(props.location.pathname);
+  console.log(props.myProp);
 
   // singleMost.data.items.url
 
@@ -83,11 +93,13 @@ function SingleMost(props) {
       axios
         .get("", {
           params: {
-            ID: props.location.pathname,
+            ID: `appointment/${props.myProp.id}`,
           },
         })
         .then(function (response) {
-          setSingleMost(response.data.item);
+          console.log(response.data.item);
+
+          //setSingleMost(response.data.item);
           // history.push(`${props.location.pathname}`)
         })
         .catch(function (error) {
@@ -106,29 +118,29 @@ function SingleMost(props) {
     <>
     <Router>
       <Switch>
-      <Route  path={"/admin/viewAppointments/:appointmentId/edit"} render={() => <SingleMostEdit myProp={singleMost} />} />
-      
+      <Route exact path={"/admin/viewAppointments/:appointmentId/edit"} render={() => <SingleMostEdit myProp={singleMost} />} />
+      <Route exact path={"/admin/viewAppointments/"}  component={Appointment} />
 
       </Switch>
         
-    <div key={singleMost._id}>
+    <div key={props.myProp._id}>
      
 
-      <h2>{singleMost.name}</h2>
+      <h2>{props.myProp.name}</h2>
       <br />
-      <p>{singleMost.phoneNo}</p>
+      <p>{props.myProp.phoneNo}</p>
       <br />
-      <strong>{singleMost.locaiton}</strong>
-      <p>{singleMost.problem}</p>
+      <strong>{props.myProp.locaiton}</strong>
+      <p>{props.myProp.problem}</p>
       <br />
-      <p>{singleMost.history}</p>
+      <p>{props.myProp.history}</p>
       <br />
       <br />
 
       <Link to={`/admin/viewAppointments/`} style={{ textDecoration: "none" }}>
         <input type="button" value="GO BACK" /><br/>
       </Link>
-      <Link to={`/admin/viewAppointments/${singleMost._id}/edit`} style={{ textDecoration: "none" }}>
+      <Link to={`/admin/viewAppointments/${props.myProp._id}/edit`} style={{ textDecoration: "none" }}>
         <input type="button" value="EDIT" /><br/>
       </Link>
       
