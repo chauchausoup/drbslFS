@@ -12,8 +12,13 @@ function News2() {
         <Switch>
           <Route path={"/news/:newsId"} exact component={SingleMost} />
           <Route path={"/news/:newsId/delete"} component={SingleMostDelete} />
-          <Route path={"/news/:newsId/edit"} component={SingleMostEdit} />
+          
+
           <Route path={"/news"} exact component={News} />
+
+
+        
+
         </Switch>
       </Router>
     </div>
@@ -41,7 +46,7 @@ function News() {
 
     return (
         
-        <Link to={`/news/${id}`} style={{ textDecoration: "none" }}>
+        <Link to={`/news/${id}`} style={{ textDecoration: "none" }} key={id}>
         <div id="newz" key={id}>
           <label id="news-title">{newz.title}</label>
           <br />
@@ -84,7 +89,7 @@ function SingleMost(props) {
         })
         .finally(function () {
           // always executed
-          console.log(singleMost)
+          
         });
     };
 
@@ -92,38 +97,75 @@ function SingleMost(props) {
   }, []);
 
   return (
-    <div>
+    <>
+    <Router>
+      <Switch>
+      <Route  path={"/news/:newsId/edit"} render={() => <SingleMostEdit myProp={singleMost} />} />
+      </Switch>
+        
+    <div key={singleMost._id}>
+     
+
       <h2>{singleMost.title}</h2>
       <br />
       <p>{singleMost.content}</p>
       <br />
       <strong>{singleMost.date}</strong>
+      
       <br />
 
       <Link to={`/news/`} style={{ textDecoration: "none" }}>
         <input type="button" value="GO BACK" /><br/>
       </Link>
-      <Link to={`/news/${singleMost.id}/edit`} style={{ textDecoration: "none" }}>
+      <Link to={`/news/${singleMost._id}/edit`} style={{ textDecoration: "none" }}>
         <input type="button" value="EDIT" /><br/>
       </Link>
-      <Link to={`/news/${singleMost.id}/delete`} style={{ textDecoration: "none" }}>
+      <Link to={`/news/${singleMost._id}/delete`} style={{ textDecoration: "none" }}>
         <input type="button" value="DELETE" /><br/>
       </Link>
-
     </div>
+    </Router>
+
+    </>
+
   );
 }
 
 // single most delete componenet
 
 function SingleMostDelete(props){
-  console.log(props);
+  let history = useHistory();
 
+   const newsDelete=(e)=>{
+    e.preventDefault();
+    const fetchData = async () => {
+      axios
+        .delete("", {
+          params: {
+            ID: props.location.pathname,
+          },
+        })
+        .then(function (response) {
+          
+          history.push('/news')
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        
+    };
+
+    fetchData();
+  }
+
+  
 return(
   <div> 
    <h1>Are you sure ?</h1>
-    <button>yes</button>
-    <button>no</button>
+        <input type="button" value="YES" onClick={newsDelete}/><br/>
+    <Link to={`/news/`} style={{ textDecoration: "none" }}>
+        <input type="button" value="NO" /><br/>
+      </Link>
 
   </div>
 )
@@ -132,76 +174,92 @@ return(
 //single most edit componenet
 
 function SingleMostEdit(props){
-  console.log(props);
   let history = useHistory();
       
-  const [newsInfo,setNewsInfo]=useState({
-        title:"",
-        content:"",
-        date:""
+  const [editInfo,setEditInfo]=useState(props.myProp)
 
-  })
+console.log("edit")
+console.log(props)
 
-  const changeHandler=(e)=>{
-        setNewsInfo({
-              ...newsInfo,
-              [e.target.name]:e.target.value
-        })
-        console.log(newsInfo)
-  }
+const editHandler=(e)=>{
+  e.preventDefault();
+  setEditInfo({
+    ...editInfo,
+    [e.target.name]:e.target.value
+})
+console.log(editInfo)
+}
 
 
-  const submitHandler=(e)=>{
-        e.preventDefault();
-        console.log(newsInfo)
-        let  params = {
-              title:newsInfo.title,
-              content:newsInfo.content,
-              date:newsInfo.date
+  const submitHnadler=(e)=>{
+    e.preventDefault();
+//let params=[];
+
+      console.log("submitted");
+
+            console.log(editInfo);
+            let  params = {
+              _id:editInfo._id,
+              title:editInfo.title,
+              content:editInfo.content,
+              date:editInfo.date
 
         };
-       /*  axios
-        .post('/admin/news',params)
-        .then((res)=>{
-              console.log(res);
+         /*    Object.keys(editInfo).forEach((key)=>{
+              if(key!=="_id"){
+                console.log(key,editInfo[key])
 
-              if(res.status===200){
-                    history.push('/admin')
-
+                params =params.push({
+                  key:editInfo[key]
+                  });
               }
-              
-        })
-        .catch(err=>{
-              console.log(err)
-        });
- */
+            }) */
+
+           
+            axios
+            .patch(`/news/${editInfo._id}`,params)
+            .then((res)=>{
+                  console.log(res);
+
+                  if(res.status===200){
+                        history.push('/news')
+
+                  }
+                  
+            })
+            .catch(err=>{
+                  console.log(err)
+            });
+ 
   }
+ 
 return(
   <div> 
-    <form id="recent_news_edit" onSubmit={submitHandler}>
+    <form id="recent_news_edit">
             <h3>
                   Add Recent News
             </h3>
             <label>
                   Title:
             </label>
-            <input type="text" name="title" id="news_title" onChange={changeHandler}/><br/>
+            <input type="text" name="title" value={editInfo.title} id="news_title" onChange={editHandler}/><br/>
             <label>
                   Date:
             </label>
-            <input type="text" name="date" id="news_date" onChange={changeHandler}/><br/>
+            <input type="text" name="date" value={editInfo.date} id="news_date" onChange={editHandler} /><br/>
             <label>
                   Body:
             </label>
-            <textarea name="content" id="news_body" onChange={changeHandler}/><br/>
+            <textarea name="content" value={editInfo.content} id="news_body" onChange={editHandler} /><br/>
             
             
-      <button type="submit">Submit</button>
-<input type="button" value="GO BACK"/>
+      <button type="submit" onClick={submitHnadler}>Submit</button>
+
+    <Link to={`/news/`} style={{ textDecoration: "none" }}><input type="button" value="GO BACK"/></Link> 
 
 
       </form>
 
   </div>
-)
-}
+  )
+  }
