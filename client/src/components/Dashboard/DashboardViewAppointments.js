@@ -219,10 +219,10 @@ function SingleMostEdit(props) {
                         history.go()
         
         
-/* 
+
            
             axios
-            .patch(`/news/${editInfo._id}`,params)
+            .patch(`/appointment/${editInfo._id}`,params)
             .then((res)=>{
                   console.log(res);
 
@@ -235,7 +235,7 @@ function SingleMostEdit(props) {
             })
             .catch(err=>{
                   console.log(err)
-            }); */
+            }); 
  
   } 
 
