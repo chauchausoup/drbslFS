@@ -3,8 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import '../../styles/appointment.scss'
-
+import "../../styles/appointment.scss";
 
 //import appointmentDate from "../data/appointment";
 function AppointmentView() {
@@ -12,14 +11,12 @@ function AppointmentView() {
     <div>
       <Router>
         <Switch>
-          
-
-          <Route exact path={"/admin/viewAppointments/"}  component={Appointment} />
-
-
-
-        
-
+          <Route
+            exact
+            path={"/admin/viewAppointments/"}
+            component={Appointment}
+          />
+         
         </Switch>
       </Router>
     </div>
@@ -42,113 +39,130 @@ function Appointment() {
   }, []);
 
   return appointmentData.map((appoi, index) => {
-    
     const id = appoi.id;
-    console.log(id)
-
+    console.log(id);
 
     return (
-        <div  key={id}  id="appoi">
-          <Router>
-            <Switch>
-          <Route exact path={"/admin/viewAppointments/:appointmentId"}  render={() => <SingleMost myProp={appointmentData} />} />
-        </Switch>
-        <Link to={`/admin/viewAppointments/${id}`} style={{ textDecoration: "none" }}>
-        <div key={id}>
-          <label id="appointment-title">{appoi.name}</label>
-          <br />
-          <label id="appointment-location">{appoi.location}</label>
-          <br />
-          <label id="appointment-phoneNo">{appoi.phoneNo}</label>
-          <br />
-          <label id="appointment-problem">{appoi.problem.split(" ").splice(0,10).join(" ")}</label>
-          <br />
-          <label id="appointment-history">{appoi.history.split(" ").splice(0,10).join(" ")}</label>
-          <br />
-         
-        </div>
-      </Link>
-      </Router>
+      <div key={id} id="appoi">
+        <Router>
+          <Switch>
+          <Route exact path={"/admin/viewAppointments/:appointmentId"}
+           render={() => <SingleMost myProp={appoi} />}
+           />
+
+           {/*  component={SingleMost}  */}
+          </Switch>
+
+          <Link
+            to={`/admin/viewAppointments/${id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <div key={id}>
+              <label id="appointment-title">{appoi.name}</label>
+              <br />
+              <label id="appointment-location">{appoi.location}</label>
+              <br />
+              <label id="appointment-phoneNo">{appoi.phoneNo}</label>
+              <br />
+              <label id="appointment-problem">
+                {appoi.problem.split(" ").splice(0, 10).join(" ")}
+              </label>
+              <br />
+              <label id="appointment-history">
+                {appoi.history.split(" ").splice(0, 10).join(" ")}
+              </label>
+              <br />
+            </div>
+          </Link>
+        </Router>
 
       </div>
-      
     );
   });
 }
 
 //get single most component
 
-
 function SingleMost(props) {
-  console.log("hello")
+  console.log("hello");
   const [singleMost, setSingleMost] = useState([]);
   let history = useHistory();
+let myProp = props.myProp;
 
-  console.log(props.myProp);
+  console.log(myProp);
 
   // singleMost.data.items.url
 
-  useEffect(() => {
+   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get("", {
-          params: {
-            ID: `appointment/${props.myProp.id}`,
-          },
-        })
+        .get("/appointment/"+myProp.id)
         .then(function (response) {
-          console.log(response.data.item);
+          console.log(response);
 
-          //setSingleMost(response.data.item);
-          // history.push(`${props.location.pathname}`)
+          setSingleMost(response.data.item);
         })
         .catch(function (error) {
           console.log(error);
         })
         .finally(function () {
           // always executed
-          
         });
     };
 
     fetchData();
-  }, []);
+  }, []); 
+
+  const backHandler=()=>{
+    history.push('/admin/viewAppointments')
+    //history.go()
+    console.log(singleMost)
+  }
 
   return (
     <>
-    <Router>
-      <Switch>
-      <Route exact path={"/admin/viewAppointments/:appointmentId/edit"} render={() => <SingleMostEdit myProp={singleMost} />} />
-      <Route exact path={"/admin/viewAppointments/"}  component={Appointment} />
+      <Router>
+        <Switch>
+          <Route
+            
+            path={"/admin/viewAppointments/:appointmentId/edit"}
+            render={() => <SingleMostEdit myProp={singleMost} />}
+          />
+         {/* <Route exact path={"/admin/viewAppointment/:appointmentId"} component={}/>  */}
+         
 
-      </Switch>
-        
-    <div key={props.myProp._id}>
-     
+        </Switch>
 
-      <h2>{props.myProp.name}</h2>
-      <br />
-      <p>{props.myProp.phoneNo}</p>
-      <br />
-      <strong>{props.myProp.locaiton}</strong>
-      <p>{props.myProp.problem}</p>
-      <br />
-      <p>{props.myProp.history}</p>
-      <br />
-      <br />
 
-      <Link to={`/admin/viewAppointments/`} style={{ textDecoration: "none" }}>
-        <input type="button" value="GO BACK" /><br/>
-      </Link>
-      <Link to={`/admin/viewAppointments/${props.myProp._id}/edit`} style={{ textDecoration: "none" }}>
-        <input type="button" value="EDIT" /><br/>
-      </Link>
-      
-    </div>
-    </Router>
+        <div key={myProp._id}>
+        <h1>Hello Appointer</h1>
+          <h2>{myProp.name}</h2>
+          <br />
+          <p>{myProp.phoneNo}</p>
+          <br />
+          <strong>{myProp.locaiton}</strong>
+          <p>{myProp.problem}</p>
+          <br />
+          <p>{myProp.history}</p>
+          <br />
+          <br />
+
+         
+            <input type="button" value="GO BACK" onClick={backHandler}/>
+            <br />
+         
+          <Link
+            to={`/admin/viewAppointments/${singleMost._id}/edit`}
+            style={{ textDecoration: "none" }}
+          >
+            <input type="button" value="EDIT" />
+            <br />
+          </Link>
+
+        </div>
+      </Router>
 
     </>
-
   );
 }
 
@@ -195,8 +209,8 @@ return(
 
 //single most edit componenet
 
-function SingleMostEdit(props){
- /*  let history = useHistory();
+function SingleMostEdit(props) {
+  /*  let history = useHistory();
       
   const [editInfo,setEditInfo]=useState(props.myProp)
 
@@ -247,18 +261,16 @@ console.log(editInfo)
             });
  
   } */
- 
-return(
-  <div> 
-    <h3>COMING SOON</h3>
-            
-      <button type="submit" >Submit</button>
 
-    <Link to={`/admin/viewAppointments/`} style={{ textDecoration: "none" }}><input type="button" value="GO BACK"/></Link> 
+  return (
+    <div>
+      <h3>COMING SOON</h3>
 
+      <button type="submit">Submit</button>
 
-      
-
-  </div>
-  )
-  }
+      <Link to={`/admin/viewAppointments/`} style={{ textDecoration: "none" }}>
+        <input type="button" value="GO BACK" />
+      </Link>
+    </div>
+  );
+}

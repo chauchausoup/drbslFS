@@ -1,10 +1,12 @@
 
-#appointment{
+#appoi{
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: 50vh;
+    
     margin: auto auto;
+    margin:10px;
+    border: 1px solid black;
+    padding: 10px;
 }
 
 
@@ -20,16 +22,11 @@
     cursor: pointer;
 }
 
-#news-title{
+#appointment-title{
     color: black;
     font-weight: 2px;
 }
 
-#news-date{
-    color:greenyellow;
-}
-
-#seeMore{
-    margin: auto;
-    color: grey;
+#appointment-history{
+    color:blueviolet;
 }

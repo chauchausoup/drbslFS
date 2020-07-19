@@ -11,9 +11,9 @@ function News2() {
       <Router>
         <Switch>
           <Route path={"/news/:newsId"} exact component={SingleMost} />
+          <Route path={"/news"} exact component={News} />
           
 
-          <Route path={"/news"} exact component={News} />
 
 
         
@@ -94,13 +94,18 @@ function SingleMost(props) {
 
     fetchData();
   }, []);
-
+  
+  const backHandler=()=>{
+    history.push('/news');
+    history.go();
+  }
   return (
     <>
     <Router>
       <Switch>
       <Route  path={"/news/:newsId/edit"} render={() => <SingleMostEdit myProp={singleMost} />} />
       <Route  path={"/news/:newsId/delete"} component={SingleMostDelete} />
+
 
       </Switch>
         
@@ -115,9 +120,9 @@ function SingleMost(props) {
       
       <br />
 
-      <Link to={`/news/`} style={{ textDecoration: "none" }}>
-        <input type="button" value="GO BACK" /><br/>
-      </Link>
+     
+        <input type="button" value="GO BACK" onClick={backHandler}/><br/>
+      
       <Link to={`/news/${singleMost._id}/edit`} style={{ textDecoration: "none" }}>
         <input type="button" value="EDIT" /><br/>
       </Link>
