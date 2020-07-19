@@ -4,6 +4,12 @@ import { Map, TileLayer, Marker } from "react-leaflet";
 import '../../App.css'
 
 
+
+//if user is logged in normal setting of position as well as submit button for axios call
+
+//is user is not logged in then no submit button as well as no setting of marker
+
+
 class DashboardLocation extends Component {
   constructor(props) {
     super(props)
@@ -16,10 +22,21 @@ class DashboardLocation extends Component {
       zoom: 15,
       draggable: true,
       markerData: [],
+      flag:false
     }
   }
   
- 
+ componentDidMount(){
+  if(sessionStorage.getItem('useData')){
+    this.setState({
+      flag:false
+    })
+  }else{
+    this.setState({
+      flag:true
+    })
+  }
+ }
 
   //add marker
 
@@ -66,6 +83,7 @@ class DashboardLocation extends Component {
   };
 
   render() {
+   
     return (
       <React.Fragment>
       <Map
@@ -86,11 +104,13 @@ class DashboardLocation extends Component {
             draggable={this.state.draggable}
             onDragend={this.updateMarker}
            onclick={this.removeMarkerHandler}
+           
          />
         ))}
         
       </Map>
-      <input type="button" value="Submit"/><br/>
+      {(sessionStorage.getItem('userData'))? <input type="button" value="Submit"/> : null}
+      
       </React.Fragment>
     );
   }
