@@ -73,14 +73,14 @@ return(
                         id="login_email" 
                         onChange={handleInputChange}
                         />
-
+                        <br/>
                         <input 
                         type="password" 
                         name="password" 
                         id="login_password" 
                         onChange={handleInputChange}
                         />
-                        
+                        <br/>
                        <button type="submit">Login</button> 
                        
                   </form>

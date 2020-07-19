@@ -86,8 +86,11 @@ function SingleMost(props) {
     };
 
     fetchData();
+   
+
   }, []);
 
+  
  
   
   const backHandler=()=>{
@@ -115,15 +118,26 @@ function SingleMost(props) {
       
       <br />
 
+     {/* in order to edit must be an edmin */}
      
-        <input type="button" value="GO BACK" onClick={backHandler}/><br/>
-      
-      <Link to={`/news/${singleMost._id}/edit`} style={{ textDecoration: "none" }}>
-        <input type="button" value="EDIT" /><br/>
-      </Link>
-      <Link to={`/news/${singleMost._id}/delete`} style={{ textDecoration: "none" }}>
-        <input type="button" value="DELETE" /><br/>
-      </Link>
+       { (!sessionStorage.getItem("userData")) ? <input type="button" value="GO BACK" onClick={backHandler}/> :
+
+        
+  <div>
+     <input type="button" value="GO BACK" onClick={backHandler}/><br/>
+
+        <Link to={`/news/${singleMost._id}/edit`} style={{ textDecoration: "none" }}>
+          <input type="button" value="EDIT" /><br/>
+        </Link>
+        <Link to={`/news/${singleMost._id}/delete`} style={{ textDecoration: "none" }}>
+          <input type="button" value="DELETE" /><br/>
+        </Link>
+     </div>
+     
+     }
+
+     
+    
     </div>
     </Router>
 
