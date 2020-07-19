@@ -1,7 +1,8 @@
 
 import React, { Component } from "react";
-import { Map, TileLayer, Marker } from "react-leaflet";
+//import { Map, TileLayer, Marker } from "react-leaflet";
 import '../../App.css'
+
 
 
 
@@ -9,7 +10,7 @@ import '../../App.css'
 
 //is user is not logged in then no submit button as well as no setting of marker
 
-
+/* 
 class DashboardLocation extends Component {
   constructor(props) {
     super(props)
@@ -114,5 +115,25 @@ class DashboardLocation extends Component {
       </React.Fragment>
     );
   }
+} */
+
+var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
+}).addTo(mymap);
+
+function DashboardLocation2(){
+  
+  return(
+    <div id="mapid">
+      <h3>Welcome to the map</h3>
+    </div>
+  )
+
 }
-export default DashboardLocation;
+export default DashboardLocation2;
