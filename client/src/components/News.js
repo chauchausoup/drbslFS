@@ -87,6 +87,8 @@ function SingleMost(props) {
 
     fetchData();
   }, []);
+
+ 
   
   const backHandler=()=>{
     history.push('/news');
