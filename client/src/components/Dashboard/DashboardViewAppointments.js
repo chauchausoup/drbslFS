@@ -137,6 +137,8 @@ function SingleMost(props) {
       <br />
       <p>{singleMost.history}</p>
       <br />
+      <p>{singleMost.date}</p>
+      <br />
       <br />
 
       <input type="button" value="GO BACK" onClick={backHandler} />
@@ -153,107 +155,18 @@ function SingleMost(props) {
   );
 }
 
-// single most delete componenet
-/* 
-function SingleMostDelete(props){
-  let history = useHistory();
 
-   const appointmentDelete=(e)=>{
-    e.preventDefault();
-    const fetchData = async () => {
-      axios
-        .delete("", {
-          params: {
-            ID: props.location.pathname,
-          },
-        })
-        .then(function (response) {
-          
-          history.push('/appointment')
-          history.go()
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-        
-    };
-
-    fetchData();
-  }
-
-  
-return(
-  <div> 
-   <h1>Are you sure ?</h1>
-        <input type="button" value="YES" onClick={appointmentDelete}/><br/>
-    <Link to={`/appointment/`} style={{ textDecoration: "none" }}>
-        <input type="button" value="NO" /><br/>
-      </Link>
-
-  </div>
-)
-} */
 
 //single most edit componenet
 
 function SingleMostEdit(props) {
-  /*  let history = useHistory();
-      
-  const [editInfo,setEditInfo]=useState(props.myProp)
-
-console.log("edit")
-console.log(props)
-
-const editHandler=(e)=>{
-  e.preventDefault();
-  setEditInfo({
-    ...editInfo,
-    [e.target.name]:e.target.value
-})
-console.log(editInfo)
-}
-
-
-  const submitHnadler=(e)=>{
-    e.preventDefault();
-//let params=[];
-
-      console.log("submitted");
-
-            console.log(editInfo);
-            let  params = {
-              _id:editInfo._id,
-              title:editInfo.title,
-              content:editInfo.content,
-              date:editInfo.date
-
-        };
-        
-
-           
-            axios
-            .patch(`/appointment/${editInfo._id}`,params)
-            .then((res)=>{
-                  console.log(res);
-
-                  if(res.status===200){
-                        history.push('/appointment')
-                        history.go()
-
-                  }
-                  
-            })
-            .catch(err=>{
-                  console.log(err)
-            });
- 
-  } */
+  
 
   return (
     <div>
       <h3>COMING SOON</h3>
 
-      <button type="submit">Submit</button>
+      <button type="submit">Submit</button><br/>
 
       <Link to={`/admin/viewAppointments`} style={{ textDecoration: "none" }}>
         <input type="button" value="GO BACK" />
@@ -261,3 +174,5 @@ console.log(editInfo)
     </div>
   );
 }
+
+

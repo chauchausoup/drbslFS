@@ -49,7 +49,8 @@ function MultipleForms(){
                     phoneNo:"977",
                     location:"Pokhara",
                     problem:"abc",
-                    history:"xyz"
+                    history:"xyz",
+                    date:"2020-02-01"
                 })
                 
         
@@ -79,6 +80,8 @@ function MultipleForms(){
                               return (
                               <Step3
                               value1={value1}
+                              handleChange={handleChange}
+
                                  nextStep={nextStep}
                                 prevStep={prevStep}
 
@@ -86,7 +89,10 @@ function MultipleForms(){
                               )
                     case 4:
                               return (
-                              <Step4/>
+                              <Step4
+                                 value1={value1}
+                              handleChange={handleChange}
+                              />
                               )
                    
                     default:
@@ -153,16 +159,18 @@ function Step3(props){
     let history = useHistory();
 
     
+   
     function nextHandler(e){
         e.preventDefault();
         //console.log(props.value1)
         // make an axios post request with params to the API endpoint
-        let  params = {
+      let  params = {
             name:props.value1.name,
             phoneNo:props.value1.phoneNo,
             location:props.value1.location,
             problem:props.value1.problem,
-            history:props.value1.history
+            history:props.value1.history,
+            date:props.value1.date
 
       };
       console.log(params);
@@ -175,9 +183,7 @@ function Step3(props){
             if(res.status===200){
                   history.push('/')
                   //history.go()
-
             }
-            
       })
       .catch(err=>{
             console.log(err)
@@ -191,7 +197,8 @@ function prevHandler(e){
         props.prevStep();
 
 }
-    var value1= {...props.value1}
+const {value1,handleChange}=props;
+
           return(
                     <div>
                               <ul id="toConfirm">
@@ -202,9 +209,11 @@ function prevHandler(e){
                                   <li key="5">{value1.problem}</li><br/>
 
                               </ul>
+                              <input type="text" placeholder="Date"  onChange={(e)=>{handleChange('date',e)}}/><br/>
+                              <input type="button" value="Confirm" onClick={nextHandler}/><br/>
+
                               <input type="button" value="Prev" onClick={prevHandler}/><br/>
 
-                              <input type="button" value="Confirm" onClick={nextHandler}/><br/>
                     </div>
           )
 

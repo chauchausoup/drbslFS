@@ -23,6 +23,10 @@ const appointmentSchema = mongoose.Schema({
          problem:{
                type:String,
                required:true
+         },
+         date:{
+               type:String,
+               required:true
          }
 })
 

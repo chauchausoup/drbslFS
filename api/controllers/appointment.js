@@ -22,6 +22,7 @@ exports.get_appointments_all=(req,res,next)=>{
                     location:n.location,
                     history:n.history,
                     problem:n.problem,
+                    date:n.date,
 
                     request:{
                         type:'GET',
@@ -106,7 +107,8 @@ exports.post_appointment_single=(req,res,next)=>{
         phoneNo:req.body.phoneNo,
         location:req.body.location,
         history:req.body.history,
-        problem:req.body.problem    
+        problem:req.body.problem,
+        date:req.body.date   
   }) 
 
 /* 
@@ -133,6 +135,7 @@ News.findOneAndUpdate(query, req.newData, {upsert: true}, function(err, doc) {
                                 location:result.location,
                                 history:result.history,
                                 problem:result.problem,
+                                date:req.body.date
                             }
                             
                       })
