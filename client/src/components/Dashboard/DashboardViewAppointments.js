@@ -16,7 +16,12 @@ function AppointmentView() {
             path={"/admin/viewAppointments/"}
             component={Appointment}
           />
-         
+          <Route exact path={"/appointment/:id"} component={SingleMost} />
+          <Route
+            exact
+            path={"/appointment/:appointmentId/edit"}
+            component={SingleMostEdit}
+          />
         </Switch>
       </Router>
     </div>
@@ -43,39 +48,37 @@ function Appointment() {
     console.log(id);
 
     return (
-      <div key={id} id="appoi">
-        <Router>
+      <div key={id}>
+        {/* <Router>
           <Switch>
           <Route exact path={"/admin/viewAppointments/:appointmentId"}
            render={() => <SingleMost myProp={appoi} />}
            />
 
-           {/*  component={SingleMost}  */}
+            component={SingleMost}  
           </Switch>
-
-          <Link
-            to={`/admin/viewAppointments/${id}`}
-            style={{ textDecoration: "none" }}
-          >
-            <div key={id}>
-              <label id="appointment-title">{appoi.name}</label>
-              <br />
-              <label id="appointment-location">{appoi.location}</label>
-              <br />
-              <label id="appointment-phoneNo">{appoi.phoneNo}</label>
-              <br />
-              <label id="appointment-problem">
-                {appoi.problem.split(" ").splice(0, 10).join(" ")}
-              </label>
-              <br />
-              <label id="appointment-history">
-                {appoi.history.split(" ").splice(0, 10).join(" ")}
-              </label>
-              <br />
-            </div>
-          </Link>
+        
         </Router>
+      */}
 
+        <Link to={`/appointment/${id}`} style={{ textDecoration: "none" }}>
+          <div key={id} id="appoi">
+            <label id="appointment-title">{appoi.name}</label>
+            <br />
+            <label id="appointment-location">{appoi.location}</label>
+            <br />
+            <label id="appointment-phoneNo">{appoi.phoneNo}</label>
+            <br />
+            <label id="appointment-problem">
+              {appoi.problem.split(" ").splice(0, 10).join(" ")}
+            </label>
+            <br />
+            <label id="appointment-history">
+              {appoi.history.split(" ").splice(0, 10).join(" ")}
+            </label>
+            <br />
+          </div>
+        </Link>
       </div>
     );
   });
@@ -84,19 +87,23 @@ function Appointment() {
 //get single most component
 
 function SingleMost(props) {
-  console.log("hello");
+  //console.log("hello");
   const [singleMost, setSingleMost] = useState([]);
   let history = useHistory();
-let myProp = props.myProp;
-
-  console.log(myProp);
+  //let myProp = props.myProp;
+  //console.log(props)
+  //console.log(props.location.pathname);
 
   // singleMost.data.items.url
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       axios
-        .get("/appointment/"+myProp.id)
+        .get("", {
+          params: {
+            ID: props.location.pathname,
+          },
+        })
         .then(function (response) {
           console.log(response);
 
@@ -111,58 +118,38 @@ let myProp = props.myProp;
     };
 
     fetchData();
-  }, []); 
+  }, []);
 
-  const backHandler=()=>{
-    history.push('/admin/viewAppointments')
+  const backHandler = () => {
+    history.push("/admin/viewAppointments");
     //history.go()
-    console.log(singleMost)
-  }
+    //console.log(singleMost)
+  };
 
   return (
-    <>
-      <Router>
-        <Switch>
-          <Route
-            
-            path={"/admin/viewAppointments/:appointmentId/edit"}
-            render={() => <SingleMostEdit myProp={singleMost} />}
-          />
-         {/* <Route exact path={"/admin/viewAppointment/:appointmentId"} component={}/>  */}
-         
+    <div key={singleMost._id}>
+      <h2>{singleMost.name}</h2>
+      <br />
+      <p>{singleMost.phoneNo}</p>
+      <br />
+      <strong>{singleMost.locaiton}</strong>
+      <p>{singleMost.problem}</p>
+      <br />
+      <p>{singleMost.history}</p>
+      <br />
+      <br />
 
-        </Switch>
+      <input type="button" value="GO BACK" onClick={backHandler} />
+      <br />
 
-
-        <div key={myProp._id}>
-        <h1>Hello Appointer</h1>
-          <h2>{myProp.name}</h2>
-          <br />
-          <p>{myProp.phoneNo}</p>
-          <br />
-          <strong>{myProp.locaiton}</strong>
-          <p>{myProp.problem}</p>
-          <br />
-          <p>{myProp.history}</p>
-          <br />
-          <br />
-
-         
-            <input type="button" value="GO BACK" onClick={backHandler}/>
-            <br />
-         
-          <Link
-            to={`/admin/viewAppointments/${singleMost._id}/edit`}
-            style={{ textDecoration: "none" }}
-          >
-            <input type="button" value="EDIT" />
-            <br />
-          </Link>
-
-        </div>
-      </Router>
-
-    </>
+      <Link
+        to={`/appointment/${singleMost._id}/edit/`}
+        style={{ textDecoration: "none" }}
+      >
+        <input type="button" value="EDIT" />
+        <br />
+      </Link>
+    </div>
   );
 }
 
@@ -268,7 +255,7 @@ console.log(editInfo)
 
       <button type="submit">Submit</button>
 
-      <Link to={`/admin/viewAppointments/`} style={{ textDecoration: "none" }}>
+      <Link to={`/admin/viewAppointments`} style={{ textDecoration: "none" }}>
         <input type="button" value="GO BACK" />
       </Link>
     </div>
