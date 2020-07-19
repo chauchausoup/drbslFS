@@ -12,12 +12,6 @@ function News2() {
         <Switch>
           <Route path={"/news/:newsId"} exact component={SingleMost} />
           <Route path={"/news"} exact component={News} />
-          
-
-
-
-        
-
         </Switch>
       </Router>
     </div>
@@ -32,7 +26,6 @@ function News() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios("/news");
-
       setNewsData(result.data.items);
     };
 

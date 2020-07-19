@@ -16,12 +16,8 @@ function AppointmentView() {
             path={"/admin/viewAppointments/"}
             component={Appointment}
           />
-          <Route exact path={"/appointment/:id"} component={SingleMost} />
-          <Route
-            exact
-            path={"/appointment/:appointmentId/edit"}
-            component={SingleMostEdit}
-          />
+          <Route exact path={"/appointment/:appointmentId"} component={SingleMost} />
+          
         </Switch>
       </Router>
     </div>
@@ -127,6 +123,19 @@ function SingleMost(props) {
   };
 
   return (
+    <>
+    <Router>
+      <Switch>
+      <Route
+            exact
+            path={"/appointment/:appointmentId/edit"}
+            render={() => <SingleMostEdit myProp={singleMost} />}
+      />
+{/* component={SingleMostEdit} */}
+      </Switch>
+   
+
+
     <div key={singleMost._id}>
       <h2>{singleMost.name}</h2>
       <br />
@@ -144,14 +153,18 @@ function SingleMost(props) {
       <input type="button" value="GO BACK" onClick={backHandler} />
       <br />
 
+   {(singleMost.date)? 
       <Link
         to={`/appointment/${singleMost._id}/edit/`}
         style={{ textDecoration: "none" }}
       >
         <input type="button" value="EDIT" />
         <br />
-      </Link>
+      </Link> : null }
     </div>
+    </Router>
+
+    </>
   );
 }
 
@@ -160,13 +173,81 @@ function SingleMost(props) {
 //single most edit componenet
 
 function SingleMostEdit(props) {
+
+  console.log(props)
+
+   let history = useHistory();
+      
+  const [editInfo,setEditInfo]=useState(props.myProp)
+
+
+
+  const editHandler=(e)=>{
+    e.preventDefault();
+    if(e.target.name==="date"){
+      setEditInfo({
+        ...editInfo,
+        [e.target.name]:e.target.value
+    })
+    }
+   
   
+  }
+
+
+
+  const submitHandler=(e)=>{
+    e.preventDefault();
+//let params=[];
+
+      console.log("submitted");
+
+            console.log(editInfo);
+            let  params = {
+              _id:editInfo._id,
+              name:editInfo.name,
+              location:editInfo.location,
+              problem:editInfo.problem,
+              history:editInfo.history,
+              date:editInfo.date
+
+        };
+
+        console.log(params);
+
+                        history.push('/admin/')
+                        history.go()
+        
+        
+/* 
+           
+            axios
+            .patch(`/news/${editInfo._id}`,params)
+            .then((res)=>{
+                  console.log(res);
+
+                  if(res.status===200){
+                        history.push('/news')
+                        history.go()
+
+                  }
+                  
+            })
+            .catch(err=>{
+                  console.log(err)
+            }); */
+ 
+  } 
+
 
   return (
     <div>
-      <h3>COMING SOON</h3>
+      
+      <h2>My date:</h2>
 
-      <button type="submit">Submit</button><br/>
+      <input type="text" name="date" value={editInfo.date} id="date_edit" onChange={editHandler}/>
+      <br/>
+      <button type="submit"  onClick={submitHandler}>Submit</button>
 
       <Link to={`/admin/viewAppointments`} style={{ textDecoration: "none" }}>
         <input type="button" value="GO BACK" />
