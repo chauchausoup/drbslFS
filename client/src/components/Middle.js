@@ -9,11 +9,13 @@ import DashboardLocation from './Dashboard/DashboardLocation';
 export default function Middle(){
       return(
             <div>
-                       {/*  <Carousel/>
+                        <Carousel/>
                         <Boxes/>
-                        <Appointment/>
-                        <Handlers/> */}
                         <DashboardLocation/>
+
+                        <Appointment/>
+
+                        <Handlers/>
 
 
             </div>
