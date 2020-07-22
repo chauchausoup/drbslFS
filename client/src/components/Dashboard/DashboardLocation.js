@@ -65,7 +65,7 @@ function DashboardLocation2() {
   return (
     <div>
       <Map markersData={markersData} />
-      <button onClick={addMarker}>Add marker</button>
+      <button onClick={addMarker}>Submit</button>
       <ul>
         Markers data:
         {markersData.map(marker => (
