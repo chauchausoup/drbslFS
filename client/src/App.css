@@ -2,3 +2,8 @@
       height: 50vh;
       width: 50%;
     }
+
+
+    .leaflet-container {  width: 100vw;  height: 100vh; }
+
+    
