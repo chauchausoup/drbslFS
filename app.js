@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
+
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
@@ -14,9 +16,9 @@ app.use(cors())
 
 // some mongoose connection
 
-mongoose.connect('mongodb+srv://academind:'
-+process.env.MONGO_ATLAS_PW+
-'@rest-api-academind.h9wd0.mongodb.net/drbsl?retryWrites=true&w=majority',
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://academind:'+process.env.MONGO_ATLAS_PW+
+'@rest-api-academind.h9wd0.mongodb.net/drbsl?retryWrites=true&w=majority'
+,
 {
       useNewUrlParser:true,
       useUnifiedTopology:true,
@@ -50,6 +52,8 @@ const appointmentRoutes = require('./api/routes/appointment');
 //const appointmentRoutes= require('./api/routes/appointment');
 
 
+//CONFIGURATION
+
 app.use('/admin',adminRoutes);
 app.use('/login',loginRoutes);
 app.use('/news',newsRoutes);
@@ -57,6 +61,15 @@ app.use('/hospital',hospitalRoutes);
 app.use('/appointment',appointmentRoutes);
 
 
+
+//CHECK WITH HEROKU
+if(process.env.NODE_ENV=== "production"){
+      app.use(express.static('./client/build'))
+
+      app.get('*',(req,res)=>{
+            res.sendFile(path.join(__dirname,'client','build','index.html'));
+      })
+}
 
 // error handling in a server app
 
