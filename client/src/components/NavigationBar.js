@@ -22,9 +22,9 @@ export default function NavigationBar(){
                                         </div>
                                         <div className= {isOpen?"drop":"ceil"}> 
                                                   <ul id="socials1">
-                                                            <li><a href="/#">Email</a></li>
-                                                            <li><a href="/#">Facebook</a></li>
-                                                            <li><a href="/#">Viber</a></li>
+                                                            <li className="soc"><a href="/#">Email</a></li>
+                                                            <li className="soc"><a href="/#">Facebook</a></li>
+                                                            <li className="soc"><a href="/#">Viber</a></li>
                                                   
                                                   
                                                   </ul>
@@ -33,9 +33,9 @@ export default function NavigationBar(){
                                                           
                                                   </ul>
                                                   <ul id="socials2">
-                                                            <li><a href="/#">Email</a></li>
-                                                            <li><a href="/#">Facebook</a></li>
-                                                            <li><a href="/#">Viber</a></li>
+                                                            <li className="soc"><a href="/#">Email</a></li>
+                                                            <li className="soc"><a href="/#">Facebook</a></li>
+                                                            <li className="soc"><a href="/#">Viber</a></li>
                                                   
                                                   
                                                   </ul>

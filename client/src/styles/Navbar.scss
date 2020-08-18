@@ -29,12 +29,16 @@ $hoverColor:thistle;
 
 }
 #socials1{
-          display: none;
+    display: none;
+    
+          
 }
 
 #socials2{
           display: flex;
           justify-content: center;
+          flex-wrap: wrap;
+         
 }
 #routes{
           display:block;
@@ -76,6 +80,9 @@ a:hover{
           justify-content: center;
 }
 
+.soc{
+   margin-left: 5px;
+}
 
 
  /* min-width :640px */
