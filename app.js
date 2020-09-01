@@ -85,10 +85,10 @@ app.use((error,req,res,next)=>{
       })
 })
 
-app.listen(PORT,()=>{
+/* app.listen(PORT,()=>{
       log(`Server listening in : ${PORT}`)
 })
-
+ */
 
 module.exports = app;
 
