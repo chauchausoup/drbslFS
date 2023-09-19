@@ -24,7 +24,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.6.0",
-    "mongoose": "^5.9.23",
+    "mongoose": "^5.13.20",
     "react-leaflet": "^2.7.0"
   }
 }
